@@ -5,9 +5,10 @@ import InjectablePaymentCard from "./injectable-payment-card";
 import styles from "../../styles/injectable-payment-card.module.css";
 import getStripe from "../../utils/stripe";
 import { useRouter } from "next/router";
+import { KlarnaCheckoutComponent } from "./klarna-checkout-component";
 
 const PaymentStep = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { cart, createPaymentSession, setPaymentSession } =
     useContext(StoreContext);
 
@@ -15,9 +16,9 @@ const PaymentStep = () => {
     createPaymentSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const handlePayment = async () => {
-    await setPaymentSession("manual")
+    await setPaymentSession("manual");
     router.push(`/payment`);
   };
 
@@ -39,16 +40,18 @@ const PaymentStep = () => {
               );
             case "manual":
               return (
-                <div key={"manual"}>
-                  <h2>Test Payment</h2>
-                  <button
-                    onClick={handlePayment}
-                    className={styles.payBtn}
-                    id="submit"
-                  >
-                    <span id="button-text">Pay</span>
-                  </button>
-                </div>
+                // <div key={"manual"}>
+                //   <h2>Test Payment</h2>
+                //   <button
+                //     onClick={handlePayment}
+                //     className={styles.payBtn}
+                //     id="submit"
+                //   >
+                //     <span id="button-text">Pay</span>
+                //   </button>
+                // </div>
+
+                <KlarnaCheckoutComponent />
               );
             default:
               return null;
